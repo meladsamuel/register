@@ -3,3 +3,7 @@
 # disallow directory listing
 Options All -Indexes
 
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.*) public/ [L]
