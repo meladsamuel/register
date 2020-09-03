@@ -4,7 +4,7 @@ namespace shfretak\lib;
 class SessionManager extends \SessionHandler{
       private $sessionName = 'shfretak';
       private $sessionMaxLifeTime = 0;
-      private $sessionSSL = false; //TODO change to turn https have SSL
+      private $sessionSSL = true; //TODO change to turn https have SSL
       private $sessionHTTPOnly = true;
       private $sessionPath = '/';
       private $sessionDomain = null; //TODO change to .shfretak.com
