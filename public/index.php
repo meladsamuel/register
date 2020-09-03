@@ -9,8 +9,7 @@ echo \app\test::print();
 $session = new SessionManager();
 $session->start();
 $session->new = 'fsdjkfl;asd';
-$session->dump();
+
 if (!empty($session->new)) {
     echo $session->new;
 }
-echo UPLOAD_PATH;
