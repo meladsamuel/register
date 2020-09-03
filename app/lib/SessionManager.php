@@ -1,6 +1,6 @@
 <?php
 
-namespace shfretak\lib;
+namespace app;
 
 class SessionManager extends \SessionHandler
 {
