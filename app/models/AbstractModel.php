@@ -1,10 +1,10 @@
 <?php
 
-namespace app\models;
+namespace app;
 
 use ArrayIterator;
 use PDOStatement;
-use app\lib\database\DatabaseHandler;
+use app;
 
 /**
  * Class AbstractModel

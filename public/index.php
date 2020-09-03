@@ -1,6 +1,6 @@
 <?php
 
-use app\models\UsersModel;
+use app\UsersModel;
 use app\SessionManager;
 
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
