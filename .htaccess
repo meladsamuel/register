@@ -1,8 +1,5 @@
 
 
-# disallow directory listing
-Options All -Indexes
-
 RewriteEngine On
 
 RewriteRule (.*) public/ [L]
