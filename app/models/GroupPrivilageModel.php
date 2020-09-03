@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\models;
+namespace app\models;
 class GroupPrivilageModel extends AbstractModel {
       public $id;
       public $group_id;

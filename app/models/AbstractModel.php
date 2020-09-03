@@ -1,10 +1,10 @@
 <?php
 
-namespace shfretak\models;
+namespace app\models;
 
 use ArrayIterator;
 use PDOStatement;
-use shfretak\lib\database\DatabaseHandler;
+use app\lib\database\DatabaseHandler;
 
 /**
  * Class AbstractModel
@@ -12,21 +12,13 @@ use shfretak\lib\database\DatabaseHandler;
  */
 class AbstractModel
 {
-    /**
-     *
-     */
+
     const DATA_TYPE_BOOL = \PDO::PARAM_BOOL;
-    /**
-     *
-     */
+
     const DATA_TYPE_STR = \PDO::PARAM_STR;
-    /**
-     *
-     */
+
     const DATA_TYPE_INT = \PDO::PARAM_INT;
-    /**
-     *
-     */
+
     const DATA_TYPE_FLOAT = 5;
 
     /**
@@ -67,6 +59,7 @@ class AbstractModel
             $this->{static::$primeryKey} = DatabaseHandler::factory()->lastInsertId();
             return true;
         }
+        return false;
     }
 
     /**
@@ -131,27 +124,6 @@ class AbstractModel
     public static function getByPK($pk)
     {
         $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE ' . static::$primeryKey . ' = "' . $pk . '"';
-        $stmt = DatabaseHandler::factory()->prepare($sql);
-        if ($stmt->execute() === true) {
-            if (method_exists(get_called_class(), '__construct')) {
-                $obj = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
-            } else {
-                $obj = $stmt->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-            }
-            return !empty($obj) ? array_shift($obj) : false;
-        }
-        return false;
-    }
-
-    /**
-     * @param $pk
-     * @return bool|mixed
-     */
-    public static function getByPKOne($pk)
-    {
-        $sql = 'SELECT * FROM ' . static::$tableName;
-        $sql .= ' a INNER JOIN ' . static::$tableName . '_translation b ON  a.' . static::$primeryKey . ' = b.' . static::$primeryKey;
-        $sql .= '  WHERE a.' . static::$primeryKey . ' = "' . $pk . '" and b.language_code = "' . $_SESSION['lang'] . '"';
         $stmt = DatabaseHandler::factory()->prepare($sql);
         if ($stmt->execute() === true) {
             if (method_exists(get_called_class(), '__construct')) {
@@ -230,23 +202,6 @@ class AbstractModel
         return $result === false ? false : $result->current();
     }
 
-    public static function getAllOne()
-    {
-        $sql = "SELECT * FROM " . static::$tableName .
-            "  app INNER JOIN " . static::$tableName . "_translation app_t ON  app." . static::$primeryKey . " = " . "app_t." . static::$primeryKey .
-            " WHERE app_t.language_code = '" . $_SESSION['lang'] . "'";
-        $stat = DatabaseHandler::factory()->prepare($sql);
-        $stat->execute();
-        if (method_exists(get_called_class(), '__construct')) {
-            $results = $stat->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
-        } else {
-            $results = $stat->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-        }
-        if ((is_array($results) && !empty($results))) {
-            return new ArrayIterator($results);
-        };
-        return false;
-    }
 
     /**
      * the count the number of the recorders in the table
@@ -259,35 +214,6 @@ class AbstractModel
         $statment->execute();
         return (int)$statment->fetchColumn();
 
-    }
-
-    /**
-     * @param string $id
-     * @param string $language
-     * @return ArrayIterator|bool
-     */
-    public static function getAllServiceOne($language, $id)
-    {
-        return self::getOne('SELECT a.*, b.* , c.*, d.* FROM ' . static::$tableName .
-            ' a INNER JOIN ' . static::$tableName . '_translation b ON a.file_service_id = b.file_service_id' .
-            ' INNER JOIN ' . static::$tableName . '_categories c ON a.file_service_cat_id = c.file_service_cat_id' .
-            ' INNER JOIN ' . static::$tableName . '_categories_translation d ON c.file_service_cat_id = d.file_service_cat_id and b.language_code = d.language_code' .
-            ' WHERE b.language_code = "' . $language . '" AND b.file_service_id ="' . $id . '"'
-        );
-    }
-
-    public static function Search($keyword)
-    {
-        $sql = "SELECT file_service_title as searchKey FROM file_services_translation WHERE file_service_title LIKE '%" . $keyword . "%'";
-        $stat = DatabaseHandler::factory()->prepare($sql);
-        $stat->execute();
-
-        $results = $stat->fetchAll(\PDO::FETCH_ASSOC);
-
-        if ((is_array($results) && !empty($results))) {
-            return ($results);
-        };
-        return false;
     }
 
 }

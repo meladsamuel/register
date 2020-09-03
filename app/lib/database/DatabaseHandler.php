@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\lib\database;
+namespace app\lib\database;
 
 
 /**
