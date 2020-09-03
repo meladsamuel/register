@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace app\models;
 
-use app\SessionManager;
+use app\lib\SessionManager;
 
 class UsersModel extends AbstractModel
 {
@@ -21,6 +21,7 @@ class UsersModel extends AbstractModel
         'email' => self::DATA_TYPE_STR,
         'password' => self::DATA_TYPE_STR,
         'reg_date' => self::DATA_TYPE_STR,
+        'group_id' => self::DATA_TYPE_INT,
     );
 
     public function cryptPassword($password)

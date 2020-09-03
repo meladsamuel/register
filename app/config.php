@@ -20,11 +20,14 @@ defined('CSS')                   ? null :define('CSS',WEB_SITE_NAME. '/css/');//
 
 
 // CONNECTION CONSTANT
-defined('DATABASE_HOST_NAME')    ? null : define('DATABASE_HOST_NAME', 'remotemysql.com');
-defined('DATABASE_DB_NAME')      ? null : define('DATABASE_DB_NAME', 'v8IfznDLMJ');
-defined('DATABASE_USER_NAME')    ? null : define('DATABASE_USER_NAME', 'v8IfznDLMJ');
-defined('DATABASE_PASSWORD')     ? null : define('DATABASE_PASSWORD', 'JWKJDpBmKh');
-defined('DATABASE_CONN_DRIVER')  ? null : define('DATABASE_CONN_DRIVER', '1');
+//defined('DATABASE_HOST_NAME')    ? null : define('DATABASE_HOST_NAME', 'remotemysql.com');
+defined('DATABASE_HOST_NAME')    ? null : define('DATABASE_HOST_NAME', 'localhost');
+//defined('DATABASE_DB_NAME')      ? null : define('DATABASE_DB_NAME', 'v8IfznDLMJ');
+defined('DATABASE_DB_NAME')      ? null : define('DATABASE_DB_NAME', 'loginSys');
+//defined('DATABASE_USER_NAME')    ? null : define('DATABASE_USER_NAME', 'v8IfznDLMJ');
+defined('DATABASE_USER_NAME')    ? null : define('DATABASE_USER_NAME', 'melad');
+defined('DATABASE_PASSWORD')     ? null : define('DATABASE_PASSWORD', 'adv511998');
+defined('DATABASE_CONN_DRIVER')  ? null : define('DATABASE_CONN_DRIVER', 1);
 // SESSION HANDER
 defined('SESSION_PATH') ? null : define('SESSION_PATH', APP_PATH .DS.'..'.DS.'session');
 // APP SALT

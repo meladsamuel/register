@@ -1,8 +1,10 @@
 <?php
 
-namespace app;
+namespace app\lib;
 
-class SessionManager extends \SessionHandler
+use SessionHandler;
+
+class SessionManager extends SessionHandler
 {
     private string $sessionName = 'app';
     private int $sessionMaxLifeTime = 0;

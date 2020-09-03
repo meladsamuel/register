@@ -1,10 +1,10 @@
 <?php
 
-namespace app;
+namespace app\models;
 
+use app\lib\database\PDOHandler;
 use ArrayIterator;
 use PDOStatement;
-use app;
 
 /**
  * Class AbstractModel
@@ -12,7 +12,6 @@ use app;
  */
 class AbstractModel
 {
-
     const DATA_TYPE_BOOL = \PDO::PARAM_BOOL;
 
     const DATA_TYPE_STR = \PDO::PARAM_STR;
@@ -24,7 +23,7 @@ class AbstractModel
     /**
      * @return string
      */
-    public function creatPramsName()
+    public function creatPramsName(): string
     {
         $pramsName = '';
         foreach (static::$tableSchema as $columnNames => $columnName)
@@ -35,14 +34,14 @@ class AbstractModel
     /**
      * @param PDOStatement $stat
      */
-    public function preparePramsName(PDOStatement &$stat)
+    public function preparePramsName(PDOStatement &$stat): void
     {
-        foreach (static::$tableSchema as $columnName => $value) {
-            if ($value == 5) {
+        foreach (static::$tableSchema as $columnName => $type) {
+            if ($type == 5) {
                 $filterValue = filter_var($this->$columnName, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
                 $stat->bindValue(":{$columnName}", $filterValue);
             } else {
-                $stat->bindValue(":{$columnName}", $this->$columnName, $value);
+                $stat->bindValue(":{$columnName}", $this->$columnName, $type);
             }
         }
     }
@@ -53,10 +52,10 @@ class AbstractModel
     public function create()
     {
         $sql = "INSERT INTO " . static::$tableName . " SET " . static::creatPramsName();
-        $stat = DatabaseHandler::factory()->prepare($sql);
+        $stat = PDOHandler::getInstance()->prepare($sql);
         $this->preparePramsName($stat);
         if ($stat->execute()) {
-            $this->{static::$primeryKey} = DatabaseHandler::factory()->lastInsertId();
+            $this->{static::$primaryKey} = PDOHandler::getInstance()->lastInsertId();
             return true;
         }
         return false;
@@ -67,9 +66,9 @@ class AbstractModel
      */
     public function update()
     {
-        $sql = "UPDATE " . static::$tableName . " SET " . static::creatPramsName() . " WHERE " . static::$primeryKey . " = '" . $this->{static::$primeryKey} . "'";
+        $sql = "UPDATE " . static::$tableName . " SET " . static::creatPramsName() . " WHERE " . static::$primaryKey . " = '" . $this->{static::$primaryKey} . "'";
 
-        $stat = DatabaseHandler::factory()->prepare($sql);
+        $stat = PDOHandler::getInstance()->prepare($sql);
         $this->preparePramsName($stat);
         return $stat->execute();
     }
@@ -83,7 +82,7 @@ class AbstractModel
         if (false === $primaryKeyCheck) {
             return $this->create();
         }
-        return $this->{static::$primeryKey} === null ? $this->create() : $this->update();
+        return $this->{static::$primaryKey} === null ? $this->create() : $this->update();
     }
 
     /**
@@ -91,8 +90,8 @@ class AbstractModel
      */
     public function delete()
     {
-        $sql = "DELETE FROM " . static::$tableName . " WHERE " . static::$primeryKey . " = '" . $this->{static::$primeryKey} . "'";
-        $stat = DatabaseHandler::factory()->prepare($sql);
+        $sql = "DELETE FROM " . static::$tableName . " WHERE " . static::$primaryKey . " = '" . $this->{static::$primaryKey} . "'";
+        $stat = PDOHandler::getInstance()->prepare($sql);
         return $stat->execute();
     }
 
@@ -103,8 +102,8 @@ class AbstractModel
      */
     public static function getAll($limit = 0, $isDESC = false)
     {
-        $sql = "SELECT * FROM " . static::$tableName . ($isDESC ? " ORDER BY ".static::$primeryKey." DESC" : '') . ($limit ? " LIMIT $limit " : '');
-        $stat = DatabaseHandler::factory()->prepare($sql);
+        $sql = "SELECT * FROM " . static::$tableName . ($isDESC ? " ORDER BY ".static::$primaryKey." DESC" : '') . ($limit ? " LIMIT $limit " : '');
+        $stat = PDOHandler::getInstance()->prepare($sql);
         $stat->execute();
         if (method_exists(get_called_class(), '__construct')) {
             $results = $stat->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
@@ -123,8 +122,8 @@ class AbstractModel
      */
     public static function getByPK($pk)
     {
-        $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE ' . static::$primeryKey . ' = "' . $pk . '"';
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE ' . static::$primaryKey . ' = "' . $pk . '"';
+        $stmt = PDOHandler::getInstance()->prepare($sql);
         if ($stmt->execute() === true) {
             if (method_exists(get_called_class(), '__construct')) {
                 $obj = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
@@ -136,12 +135,13 @@ class AbstractModel
         return false;
     }
 
+
     /**
      * @param array $columns
      * @param array $options
      * @return ArrayIterator|bool
      */
-    public static function getby(array $columns, $options = array())
+    public static function getBy(array $columns, $options = array())
     {
         $whereClauseColumns = array_keys($columns);
         $whereClauseValues = array_values($columns);
@@ -161,7 +161,7 @@ class AbstractModel
      */
     public static function get($sql, $options = array())
     {
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = PDOHandler::getInstance()->prepare($sql);
         if (!empty($options)) {
             foreach ($options as $columnName => $type) {
                 if ($type[0] == 4) {
@@ -191,17 +191,6 @@ class AbstractModel
         return false;
     }
 
-    /**
-     * @param $sql
-     * @param array $options
-     * @return bool|mixed
-     */
-    public static function getOne($sql, $options = array())
-    {
-        $result = static::get($sql, $options);
-        return $result === false ? false : $result->current();
-    }
-
 
     /**
      * the count the number of the recorders in the table
@@ -210,10 +199,12 @@ class AbstractModel
     public static function count()
     {
         $sql = 'SELECT COUNT(*) FROM ' . static::$tableName;
-        $statment = DatabaseHandler::factory()->prepare($sql);
+        $statment = PDOHandler::getInstance()->prepare($sql);
         $statment->execute();
         return (int)$statment->fetchColumn();
 
     }
+
+
 
 }
