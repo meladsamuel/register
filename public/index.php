@@ -1,5 +1,6 @@
 <?php
 
+use app\models\UsersModel;
 use app\SessionManager;
 
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
@@ -10,6 +11,10 @@ $session = new SessionManager();
 $session->start();
 $session->new = 'fsdjkfl;asd';
 
+if(UsersModel::userExisting('test'))
+    echo 'hello';
+else
+    echo 'not exit <br>';
 if (!empty($session->new)) {
     echo $session->new;
 }
