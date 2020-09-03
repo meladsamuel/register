@@ -31,7 +31,7 @@ class UsersModel extends AbstractModel
     public static function getUsers($user)
     {
         return self::get(
-            'SELECT * FROM ' . self::$tableName . ' WHERE users.id != ' . $user
+            'SELECT * FROM ' . self::$tableName . ' WHERE id != ' . $user
         );
     }
 

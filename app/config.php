@@ -20,7 +20,7 @@ defined('CSS')                   ? null :define('CSS',WEB_SITE_NAME. '/css/');//
 
 
 // CONNECTION CONSTANT
-defined('DATABASE_HOST_NAME')    ? null : define('DATABASE_HOST_NAME', 'https://remotemysql.com/');
+defined('DATABASE_HOST_NAME')    ? null : define('DATABASE_HOST_NAME', 'remotemysql.com');
 defined('DATABASE_DB_NAME')      ? null : define('DATABASE_DB_NAME', 'v8IfznDLMJ');
 defined('DATABASE_USER_NAME')    ? null : define('DATABASE_USER_NAME', 'v8IfznDLMJ');
 defined('DATABASE_PASSWORD')     ? null : define('DATABASE_PASSWORD', 'AUh4lt00Zt');

@@ -13,6 +13,7 @@ if (UsersModel::userExisting('ali'))
     echo 'hello';
 else
     echo 'not exit <br>';
+
 if (!empty($session->new)) {
     echo $session->new;
 }
