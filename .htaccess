@@ -1,8 +1,5 @@
 
 
-RewriteEngine On
+# disallow directory listing
+Options All -Indexes
 
-RewriteCond %{HTTP_HOST} ^login-system-2.herokuapp.com$ [NC,OR]
-RewriteCond %{HTTP_HOST} ^www.login-system-2.herokuapp.com$
-RewriteCond %{REQUEST_URI} !folder/
-RewriteRule (.*) /public/$1 [L]
