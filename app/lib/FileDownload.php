@@ -1,7 +1,7 @@
 <?php
 
 
-namespace shfretak\lib;
+namespace app\lib;
 
 
 class FileDownload

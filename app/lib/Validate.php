@@ -1,23 +1,23 @@
 <?php
-namespace shfretak\lib;
+namespace app\lib;
 trait validate {
-      public $regex = [
-            'int'       => '/^[0-9]+$/',
-            'num'       => '/^[0-9]+(?:\.[0-9]+)?$/',
-            'imei'      => '/^[0-9]{14}$/',
-            'float'     => '/^[0-9]+\.[0-9]+$/',
-            'alpha'     => '/^[A-Za-z\p{Arabic} ]+$/u',
-            'alphanum'  => '/^[0-9A-Za-z\p{Arabic} ]+$/u',
-            'subUri'    => '/^[0-9A-Za-z\-]+$/',
-            'alphaNumO' => '/[0-9A-Za-z\p{Arabic} ]*/u',
-            'vDate'     => '/^[1-2][0-9][0-9][0-9]-(?:(?:0[0-9])|(?:1[0-2]))-(?:(?:0[1-9])|(?:(?:1|2)[0-9])|(?:3[0-1]))$/',
-            'email'     => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
-            'url'       => '', //TODO make this regex you can download it from the internet
-            'selector'  => '/^[1-9][0-9]*$/', 
-            'checked'   => '/^[0|1]*$/', 
-            'userName'  => '/^[0-9A-Za-z@]+$/',
+    public array $regex = [
+        'int' => '/^[0-9]+$/',
+        'num' => '/^[0-9]+(?:\.[0-9]+)?$/',
+        'imei' => '/^[0-9]{14}$/',
+        'float' => '/^[0-9]+\.[0-9]+$/',
+        'alpha' => '/^[A-Za-z\p{Arabic} ]+$/u',
+        'alphanum' => '/^[0-9A-Za-z\p{Arabic} ]+$/u',
+        'subUri' => '/^[0-9A-Za-z\-]+$/',
+        'alphaNumO' => '/[0-9A-Za-z\p{Arabic} ]*/u',
+        'vDate' => '/^[1-2][0-9][0-9][0-9]-(?:(?:0[0-9])|(?:1[0-2]))-(?:(?:0[1-9])|(?:(?:1|2)[0-9])|(?:3[0-1]))$/',
+        'email' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+        'url' => '', //TODO make this regex you can download it from the internet
+        'selector' => '/^[1-9][0-9]*$/',
+        'checked' => '/^[0|1]*$/',
+        'userName' => '/^[0-9A-Za-z@]+$/',
 
-      ];
+    ];
 
       public function int($value) {
             return (bool) preg_match($this->regex['int'], $value);

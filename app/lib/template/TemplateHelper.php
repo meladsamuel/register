@@ -1,10 +1,10 @@
 <?php
 
-namespace shfretak\lib\template;
+namespace app\lib\template;
 
 /**
  * Trait TemplateHelper
- * @package shfretak\lib\template
+ * @package app\lib\template
  */
 trait TemplateHelper
 {

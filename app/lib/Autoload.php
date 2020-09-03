@@ -1,6 +1,6 @@
 <?php
-namespace shfretak\lib;
-use shfretak;
+namespace app\lib;
+use app;
 class Autoload {
       public static function autoloader(){
             spl_autoload_register(function($class){

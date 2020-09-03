@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\models;
+namespace app\models;
 class UsersProfilesModel extends AbstractModel{
       public $user_profile_id;
       public $user_profile_first_name;

@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\lib;
+namespace app\lib;
 trait InputFilter {
       public function filterInt($input){
             return filter_var($input, FILTER_SANITIZE_NUMBER_INT);

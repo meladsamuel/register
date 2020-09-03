@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\models;
+namespace app\models;
 class UsersGroupModel extends AbstractModel {
       public $group_id;
       public $group_name;

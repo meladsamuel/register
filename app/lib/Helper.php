@@ -1,9 +1,9 @@
 <?php
 
-namespace shfretak\lib;
+namespace app\lib;
 /**
  * Trait Helper
- * @package shfretak\lib
+ * @package app\lib
  */
 trait Helper
 {

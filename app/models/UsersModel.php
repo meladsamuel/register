@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\models;
+namespace app\models;
 
 class UsersModel extends AbstractModel {
       public $user_id;

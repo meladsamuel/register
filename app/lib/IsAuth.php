@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\lib;
+namespace app\lib;
 class IsAuth {
       public function isAuth($userAcouont ){
 

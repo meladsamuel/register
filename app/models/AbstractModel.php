@@ -1,6 +1,6 @@
 <?php
 
-namespace shfretak\models;
+namespace app\models;
 
 use ArrayIterator;
 use PDOStatement;

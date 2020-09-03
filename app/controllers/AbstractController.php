@@ -1,20 +1,18 @@
 <?php
 
-namespace shfretak\controllers;
+namespace app\controllers;
 
-use shfretak\lib\Frontcontroller;
-use shfretak\lib\Language;
-use shfretak\lib\Massenger;
-use shfretak\lib\Registry;
-use shfretak\lib\SessionManager;
-use shfretak\lib\template\Template;
+use app\lib\Frontcontroller;
+use app\lib\Language;
+use app\lib\Massenger;
+use app\lib\Registry;
+use app\lib\SessionManager;
+use app\lib\template\Template;
 
 /**
  * @property  Template $_template
  * @property  Registry $__registry;
- * @property  Language language
  * @property  Massenger massenger
- * @property mixed|\shfretak\lib\Language|Massenger|\shfretak\lib\SessionManager session
  */
 abstract class AbstractController
 {

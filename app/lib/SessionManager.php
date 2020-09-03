@@ -1,13 +1,13 @@
 <?php
-namespace shfretak\lib;
+namespace app\lib;
 
 class SessionManager extends \SessionHandler{
-      private $sessionName = 'shfretak';
+      private $sessionName = 'app';
       private $sessionMaxLifeTime = 0;
       private $sessionSSL = false; //TODO change to turn https have SSL
       private $sessionHTTPOnly = true;
       private $sessionPath = '/';
-      private $sessionDomain = null; //TODO change to .shfretak.com
+      private $sessionDomain = null; //TODO change to .app.com
       private $sessionSavePath = SESSION_PATH;
       private $sessionCipherAlgo = 'AES-128-ECB';
       private $sessionCipherKey = 'WYCRYPT0K3Y@2016';

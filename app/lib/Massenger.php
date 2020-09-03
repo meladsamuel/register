@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\lib;
+namespace app\lib;
 /**
  * @proparty SessionManager $_session
  * */

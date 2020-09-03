@@ -1,7 +1,7 @@
 <?php
-namespace shfretak\lib;
+namespace app\lib;
 
-use shfretak\lib\template\Template;
+use app\lib\template\Template;
 
 
 /**
@@ -12,7 +12,7 @@ use shfretak\lib\template\Template;
  */
 class FrontController {
       use Helper;
-      const CONTROLLER_NOT_FOUND = 'shfretak\controllers\NotFoundController';
+      const CONTROLLER_NOT_FOUND = 'app\controllers\NotFoundController';
       const ACTION_NOT_FOUND = 'NotFoundAction';
       private $_controller = 'index';
       private $_action = 'default';
@@ -28,18 +28,18 @@ class FrontController {
       }
       private function _parse(){
             $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-            $url = str_replace('/shfretak', '',$url);
+            $url = str_replace('/app', '',$url);
             $url = explode('/' , trim($url, '/'), 3);
             if(isset($url[0]) && $url[0] !='') $this->_controller = $url[0];
             if(isset($url[1]) && $url[1] !='') $this->_action = $url[1];
             if(isset($url[2]) && $url[2] !='') $this->_params = explode('/' , $url[2]);
       }
       public function dispatch(){
-            $className = 'shfretak\\controllers\\'. ucfirst($this->_controller) . 'Controller';
+            $className = 'app\\controllers\\'. ucfirst($this->_controller) . 'Controller';
             $actionName = $this->_action . 'Action'; 
 
             if(!$this->_authentication->isAuthorized($this->_controller . '/' . $this->_action)){
-                  $className = 'shfretak\controllers\AuthController';
+                  $className = 'app\controllers\AuthController';
                   $actionName = 'loginAction'; 
                   $this->_controller = 'Auth';
                   $this->_action = 'login'; 
@@ -48,7 +48,7 @@ class FrontController {
                         $this->redirect('/');
                   }
                   if(!$this->_authentication->hasAccess($this->_controller, $this->_action)){
-                        $this->_controller = 'shfretak\controllers\NotFoundController';
+                        $this->_controller = 'app\controllers\NotFoundController';
                         $this->_action = 'NotFoundAction';
                   }
             }

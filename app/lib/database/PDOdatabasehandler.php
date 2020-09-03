@@ -1,5 +1,5 @@
 <?php
-namespace shfretak\lib\database;
+namespace app\lib\database;
 
 class PDOdatabasehandler extends DatabaseHandler {
       private static $_instance;

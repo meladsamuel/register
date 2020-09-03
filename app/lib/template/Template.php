@@ -1,6 +1,6 @@
 <?php
 
-namespace shfretak\lib\template;
+namespace app\lib\template;
 
 use Exception;
 

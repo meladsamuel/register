@@ -1,16 +1,11 @@
 <?php
-namespace shfretak\lib;
+namespace app\lib;
 
 /**
- * @property Language $language
  * @property Massenger $massenger
  * @property SessionManager $session
  */
 class Registry {
-    /**
-     * @var Language
-     */
-    public $language;
     /**
      * @var Massenger
      */

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace shfretak\lib;
+namespace app\lib;
 
 
-use shfretak\controllers\AbstractController;
+use app\controllers\AbstractController;
 
 trait Back
 {
