@@ -4,5 +4,8 @@
     },
     "autoload": {
         "psr-4": {"app\\": "app/"}
+    },
+    "require": {
+        "ext-openssl": "*"
     }
 }
