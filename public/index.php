@@ -6,8 +6,12 @@ use app\models\UsersModel;
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 require '..' . DS . 'app' . DS . 'config.php';
 require '..' . DS . 'vendor' . DS . 'autoload.php';
+
+
 require TEMPLATE_PATH . 'header.php';
 require VIEWS_PATH. 'user'.DS.'login.php';
+require TEMPLATE_PATH . 'footer.php';
+
 
 //if(UsersModel::userExisting('ali')){
 //    echo 'user exit ';
