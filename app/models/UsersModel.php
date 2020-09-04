@@ -39,7 +39,7 @@ class UsersModel extends AbstractModel
     public static function userExisting($username)
     {
         return self::get(
-            'SELECT * FROM ' . self::$tableName . ' WHERE name = "' . $username . '"'
+            'SELECT * FROM ' . self::$tableName . ' WHERE username = "' . $username . '"'
         );
     }
 
