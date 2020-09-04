@@ -4,14 +4,19 @@ namespace app\lib;
 
 use SessionHandler;
 
+/**
+ * Class SessionManager
+ * @property string user
+ * @package app\lib
+ */
 class SessionManager extends SessionHandler
 {
     private string $sessionName = 'app';
     private int $sessionMaxLifeTime = 0;
-    private bool $sessionSSL = true; //TODO change to turn https have SSL
+    private bool $sessionSSL = false; //TODO change to turn https have SSL
     private bool $sessionHTTPOnly = true;
     private string $sessionPath = '/';
-    private ?string $sessionDomain = null; //TODO change to .shfretak.com
+    private ?string $sessionDomain = null; //TODO change to your domain
     private string $sessionSavePath = SESSION_PATH;
     private string $sessionCipherAlgo = 'AES-128-ECB';
     private string $sessionCipherKey = 'WYCRYPT0K3Y@2016';

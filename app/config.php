@@ -8,6 +8,7 @@ defined('DS')                    ? null :define('DS', DIRECTORY_SEPARATOR);// th
 defined('APP_PATH')              ? null :define('APP_PATH', realpath(dirname(__FILE__))); //app folder path
 defined('VIEWS_PATH')            ? null :define('VIEWS_PATH', APP_PATH.DS.'view'.DS);//view folder path
 defined('TEMPLATE_PATH')         ? null :define('TEMPLATE_PATH', APP_PATH.DS.'template'.DS);// template folder path
+defined('ROUTER_PATH')         ? null :define('ROUTER_PATH', APP_PATH.DS.'routes'.DS);// template folder path
 
 // WEBSITE ROUTE
 defined('JS')                    ? null :define('JS',WEB_SITE_NAME.'/js/');//javascript folder path

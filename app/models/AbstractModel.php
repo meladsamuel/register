@@ -8,7 +8,7 @@ use PDOStatement;
 
 /**
  * Class AbstractModel
- * @package shfretak\models
+ * @package app\models
  */
 class AbstractModel
 {
@@ -102,7 +102,7 @@ class AbstractModel
      */
     public static function getAll($limit = 0, $isDESC = false)
     {
-        $sql = "SELECT * FROM " . static::$tableName . ($isDESC ? " ORDER BY ".static::$primaryKey." DESC" : '') . ($limit ? " LIMIT $limit " : '');
+        $sql = "SELECT * FROM " . static::$tableName . ($isDESC ? " ORDER BY " . static::$primaryKey . " DESC" : '') . ($limit ? " LIMIT $limit " : '');
         $stat = PDOHandler::getInstance()->prepare($sql);
         $stat->execute();
         if (method_exists(get_called_class(), '__construct')) {
@@ -167,12 +167,6 @@ class AbstractModel
                 if ($type[0] == 4) {
                     $sanitizedValue = filter_var($type[1], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
                     $stmt->bindValue(":{$columnName}", $sanitizedValue);
-                } elseif ($type[0] == 5) {
-                    if (!preg_match(self::VALIDATE_DATE_STRING, $type[1]) || !preg_match(self::VALIDATE_DATE_NUMERIC, $type[1])) {
-                        $stmt->bindValue(":{$columnName}", self::DEFAULT_MYSQL_DATE);
-                        continue;
-                    }
-                    $stmt->bindValue(":{$columnName}", $type[1]);
                 } else {
                     $stmt->bindValue(":{$columnName}", $type[1], $type[0]);
                 }
@@ -191,6 +185,16 @@ class AbstractModel
         return false;
     }
 
+    /**
+     * @param $sql
+     * @param array $options
+     * @return bool|mixed
+     */
+    public static function getOne($sql, $options = array())
+    {
+        $result = static::get($sql, $options);
+        return $result === false ? false : $result->current();
+    }
 
     /**
      * the count the number of the recorders in the table
@@ -204,7 +208,6 @@ class AbstractModel
         return (int)$statment->fetchColumn();
 
     }
-
 
 
 }

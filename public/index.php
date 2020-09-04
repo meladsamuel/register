@@ -1,16 +1,23 @@
 <?php
 
-
+use app\lib\SessionManager;
 use app\models\UsersModel;
-
+use app\lib\Request;
+use app\lib\Router;
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 require '..' . DS . 'app' . DS . 'config.php';
 require '..' . DS . 'vendor' . DS . 'autoload.php';
+$request = new Request();
+$router = new Router($request);
+$router->use('index');
+$router->dispatch();
 
+//$session = new SessionManager();
+//$session->start();
+//$session->user = '';
+//$session->dump();
+//unset($session->user);
 
-require TEMPLATE_PATH . 'header.php';
-require VIEWS_PATH. 'user'.DS.'login.php';
-require TEMPLATE_PATH . 'footer.php';
 
 
 //if(UsersModel::userExisting('ali')){

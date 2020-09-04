@@ -58,7 +58,7 @@ class UsersModel extends AbstractModel
         if ($foundUser) {
             $foundUser->last_login = date('Y-m-d H:i:s');
             $foundUser->save();
-            $session->u = $foundUser;
+            $session->user = $foundUser;
             return true;
         }
         return false;
