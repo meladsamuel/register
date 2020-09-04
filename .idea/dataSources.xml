@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://remotemysql.com:3306</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="loginSys@mysql-mevqc3xeyr6xa.mysql.database.azure.com" uuid="61c5c19e-9eab-46d3-af99-1f95173e6e72">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://mysql-mevqc3xeyr6xa.mysql.database.azure.com:3306/loginSys</jdbc-url>
+    </data-source>
   </component>
 </project>
