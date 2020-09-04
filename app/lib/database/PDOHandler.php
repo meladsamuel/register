@@ -29,7 +29,6 @@ class PDOHandler
 
     protected static function init(): void
     {
-        try {
             self::$_handler = new PDO(
                 'mysql:hostname=' . DATABASE_HOST_NAME . ';dbname=' . DATABASE_DB_NAME,
                 DATABASE_USER_NAME, DATABASE_PASSWORD, array(
@@ -37,8 +36,7 @@ class PDOHandler
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
                 )
             );
-        } catch (\PDOException $e) {
-        }
+  
     }
 
     public static function getInstance(): PDOHandler

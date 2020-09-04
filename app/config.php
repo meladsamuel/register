@@ -17,11 +17,10 @@ defined('JS')                    ? null :define('JS',WEB_SITE_NAME.'/js/');//jav
 defined('CSS')                   ? null :define('CSS',WEB_SITE_NAME. '/css/');//css folder path
 
 // CONNECTION CONSTANT
-defined('DATABASE_HOST_NAME')    ? null : define('DATABASE_HOST_NAME', 'localhost');
-defined('DATABASE_DB_NAME')      ? null : define('DATABASE_DB_NAME', 'loginSys');
-defined('DATABASE_USER_NAME')    ? null : define('DATABASE_USER_NAME', 'melad');
-defined('DATABASE_PASSWORD')     ? null : define('DATABASE_PASSWORD', 'adv511998');
-//defined('DATABASE_PASSWORD')     ? null : define('DATABASE_PASSWORD', 'jSq-(1_nymh6&LZ_');
+defined('DATABASE_HOST_NAME')    ? null : define('DATABASE_HOST_NAME', 'mysql-mevqc3xeyr6xa.mysql.database.azure.com');
+defined('DATABASE_DB_NAME')      ? null : define('DATABASE_DB_NAME', 'loginsys');
+defined('DATABASE_USER_NAME')    ? null : define('DATABASE_USER_NAME', 'melad@mysql-mevqc3xeyr6xa');
+defined('DATABASE_PASSWORD')     ? null : define('DATABASE_PASSWORD', '7RAprBQqD:W_"b^ce}s!');
 // SESSION HANDER
 defined('SESSION_PATH') ? null : define('SESSION_PATH', APP_PATH .DS.'..'.DS.'session');
 // APP SALT
