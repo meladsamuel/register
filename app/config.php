@@ -1,16 +1,13 @@
 <?php
 // SITE NAME
-defined('WEB_SITE_NAME')         ? null : define('WEB_SITE_NAME', 'https://login-system-2.herokuapp.com/');
+defined('WEB_SITE_NAME')         ? null : define('WEB_SITE_NAME', 'https://login-system-2.herokuapp.com');
 
 // DIRECTORY SEPARATOR FOR SERVER AND BROWSER
 defined('DS')                    ? null :define('DS', DIRECTORY_SEPARATOR);// the [ / ] sambol
 // PROJECT FOLDERS PATH
-defined('APP_PATH')              ? null :define('APP_PATH', realpath(dirname(dirname(__FILE__)))); //app folder path
-defined('CONTROLLER_PATH')       ? null :define('CONTROLLER_PATH', APP_PATH.DS.'controllers'.DS);//controller folder path
-defined('VIEWS_PATH')            ? null :define('VIEWS_PATH', APP_PATH.DS.'views');//view folder path
+defined('APP_PATH')              ? null :define('APP_PATH', realpath(dirname(__FILE__))); //app folder path
+defined('VIEWS_PATH')            ? null :define('VIEWS_PATH', APP_PATH.DS.'view'.DS);//view folder path
 defined('TEMPLATE_PATH')         ? null :define('TEMPLATE_PATH', APP_PATH.DS.'template'.DS);// template folder path
-defined('LANGUAGE_PATH')         ? null :define('LANGUAGE_PATH', APP_PATH.DS.'languages'.DS);// language folder path
-defined('APP_DEFAULT_LANGUAGE')  ? null :define('APP_DEFAULT_LANGUAGE', 'ar');// language folder path
 
 // WEBSITE ROUTE
 defined('JS')                    ? null :define('JS',WEB_SITE_NAME.'/js/');//javascript folder path
