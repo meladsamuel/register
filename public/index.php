@@ -8,6 +8,7 @@ defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 require '..' . DS . 'app' . DS . 'config.php';
 require '..' . DS . 'vendor' . DS . 'autoload.php';
 $request = new Request();
+var_dump($request);
 $router = new Router($request);
 $router->use('index');
 $router->dispatch();
