@@ -10,10 +10,10 @@ $session->start();
 $messenger = new Messenger($session);
 $request = new Request();
 $router = new router($request, $session, $messenger);
-$router->post('/about/test', function () {
-    echo 'about function work';
-});
+
+$router->get('/', 'Users@index');
 $router->get('/login', 'Users@login');
+$router->get('/logout', 'Users@logout');
 $router->any('/register', 'Users@register');
 $router->get('/profile', 'Users@profile');
 

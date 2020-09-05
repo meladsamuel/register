@@ -1,6 +1,6 @@
 <?php
 // SITE NAME
-defined('WEB_SITE_NAME') ? null : define('WEB_SITE_NAME', 'https://login-system-2.herokuapp.com');
+defined('WEB_SITE_NAME') ? null : define('WEB_SITE_NAME', '');
 
 // DIRECTORY SEPARATOR FOR SERVER AND BROWSER
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);// the [ / ] sambol

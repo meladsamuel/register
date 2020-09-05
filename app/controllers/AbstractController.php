@@ -10,16 +10,17 @@ use app\lib\SessionManager;
 class AbstractController
 {
     protected string $_method;
+    protected string $_controller;
     protected SessionManager $session;
     public Messenger $messenger;
+    protected array $publicURL = [
+        'register',
+    ];
+    protected $data = [];
 
-    /**
-     * @param $session
-     * @return bool
-     */
-    public function isAuthorized($session)
+    protected function isAuthorized()
     {
-        return $this->_method == 'register' || isset($session->user) ? true : false;
+        return  in_array($this->_method, $this->publicURL) || isset($this->session->user) ? true : false;
     }
 
     protected function templateHeader($SRC)
@@ -45,10 +46,10 @@ class AbstractController
         require TEMPLATE_PATH . 'footerEnd.php';
     }
 
-    protected function templateBlocks(string $views, SessionManager $session, array $msg)
+    protected function templateBlocks(string $views)
     {
         extract($this->data);
-        if ($this->isAuthorized($session)) {
+        if ($this->isAuthorized()) {
             $file = VIEWS_PATH . $views . '.view.php';
             if (file_exists($file))
                 require $file;
@@ -58,16 +59,14 @@ class AbstractController
             require VIEWS_PATH . 'user' . DS . 'login.view.php';
         }
 
-
     }
 
-    protected function view(string $views, array $msg = [], array $cssFiles = [], array $jsFiles = [])
+    protected function view(string $views, array $cssFiles = [], array $jsFiles = [])
     {
-//        var_dump($this->messenger);
         if (strpos($views, '@') !== false)
             $views = str_replace('@', DS, $views);
         $this->templateHeader($cssFiles);
-        $this->templateBlocks($views, $this->session, $msg);
+        $this->templateBlocks($views);
         $this->templateFooter($jsFiles);
     }
 
