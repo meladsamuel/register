@@ -1,0 +1,1 @@
+user|O:21:"app\models\UsersModel":7:{s:2:"id";s:1:"1";s:9:"firstName";s:5:"Melad";s:8:"lastName";s:6:"samuel";s:5:"email";s:22:"meladsamuel2@gmail.com";s:8:"password";s:60:"$2a$07$4frtkmwo83fzy3gdywstyuk.2TNM.KCuGDQprqGSTyvTkwBTv3psy";s:5:"phone";s:11:"01275888348";s:7:"address";s:5:"cairo";}

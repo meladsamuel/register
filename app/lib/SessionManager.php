@@ -6,7 +6,8 @@ use SessionHandler;
 
 /**
  * Class SessionManager
- * @property string user
+ * @property object user
+ * @property string msg
  * @package app\lib
  */
 class SessionManager extends SessionHandler
@@ -57,7 +58,7 @@ class SessionManager extends SessionHandler
      */
     public function __get($name)
     {
-        return $_SESSION[$name] !== false ? $_SESSION[$name] : false;
+        return isset($_SESSION[$name]) !== false ? $_SESSION[$name] : false;
     }
 
     public function __isset($name)

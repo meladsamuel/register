@@ -7,22 +7,24 @@ use app\lib\SessionManager;
 class UsersModel extends AbstractModel
 {
     public $id;
-    public string $username;
+    public string $firstName;
+    public string $lastName;
     public string $email;
     public string $password;
-    public string $reg_date;
-    public int $group_id;
+    public string $phone;
+    public string $address;
 
     protected static string $tableName = 'users';
     protected static string $primaryKey = 'id';
-    protected static array $tableSchema = array(
+    protected static array $tableSchema = [
         'id' => self::DATA_TYPE_INT,
-        'username' => self::DATA_TYPE_STR,
+        'firstName' => self::DATA_TYPE_STR,
+        'lastName' => self::DATA_TYPE_STR,
         'email' => self::DATA_TYPE_STR,
         'password' => self::DATA_TYPE_STR,
-        'reg_date' => self::DATA_TYPE_STR,
-        'group_id' => self::DATA_TYPE_INT,
-    );
+        'phone' => self::DATA_TYPE_STR,
+        'address' => self::DATA_TYPE_INT,
+    ];
 
     public function cryptPassword($password)
     {
@@ -36,28 +38,26 @@ class UsersModel extends AbstractModel
         );
     }
 
-    public static function userExisting($username)
+    public static function userExisting($email)
     {
         return self::get(
-            'SELECT * FROM ' . self::$tableName . ' WHERE username = "' . $username . '"'
+            'SELECT * FROM ' . self::$tableName . ' WHERE email = "' . $email . '"'
         );
     }
 
     /**
-     * @param string $username
+     * @param string $email
      * @param string $password
      * @param SessionManager $session
      * @return bool
      */
-    public static function authenticate(string $username, string $password, SessionManager $session)
+    public static function authenticate(string $email, string $password, SessionManager $session)
     {
         $password = crypt($password, APP_SALT);
         $foundUser = self::getOne(
-            'SELECT * FROM ' . self::$tableName . ' WHERE username = "' . $username . '" AND ' . 'password = "' . $password . '"'
+            'SELECT * FROM ' . self::$tableName . ' WHERE email = "' . $email . '" AND ' . 'password = "' . $password . '"'
         );
         if ($foundUser) {
-            $foundUser->last_login = date('Y-m-d H:i:s');
-            $foundUser->save();
             $session->user = $foundUser;
             return true;
         }
